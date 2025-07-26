@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 model = joblib.load("best_model.pkl")
 le_gender = joblib.load('le_gender.pkl')
 le_job = joblib.load('le_job.pkl')
-st.set_option('deprecation.showPyplotGlobalUse', False)
+# st.set_option('deprecation.showPyplotGlobalUse', False)
 
 education_order ={
     'High School': 0 ,
