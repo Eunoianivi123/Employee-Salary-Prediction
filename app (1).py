@@ -40,12 +40,16 @@ if st.button("Predict Salary Class"):
     prediction = model.predict(input_df)
     st.success(f"✅ Prediction: Your Monthly Salary is ₹{prediction[0]}")
 
+# SHAP Explanation
 explainer = shap.TreeExplainer(model)
-shap_values = explainer(input_df)
+shap_values = explainer.shap_values(input_df)
 
 st.subheader("Local Feature Impact (SHAP)")
 st.write("Red - Increases the Predicted Salary ; Blue - Decreases the Predicted Salary")
+
 plt.figure(figsize=(10, 5))
-shap.plots.waterfall(shap_values[0], show=False)
-st.pyplot(plt.gcf()) 
+shap.waterfall_plot(shap.Explanation(values=shap_values[0],
+                                     base_values=explainer.expected_value,
+                                     data=input_df.iloc[0]))
+st.pyplot(plt.gcf())
 plt.clf()
