@@ -40,7 +40,7 @@ if st.button("Predict Salary Class"):
     prediction = model.predict(input_df)
     st.success(f"✅ Prediction: Your Monthly Salary is ₹{prediction[0]}")
 
-explainer = shap.Explainer(model)
+explainer = shap.TreeExplainer(model)
 shap_values = explainer(input_df)
 
 st.subheader("Local Feature Impact (SHAP)")
